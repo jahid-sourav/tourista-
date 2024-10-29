@@ -1,7 +1,7 @@
 import useAuth from "@/hooks/useAuth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import Field from "./Field";
 
@@ -11,10 +11,12 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    getValues,
   } = useForm();
 
   const navigate = useNavigate();
-  const { loginUser } = useAuth();
+  const location = useLocation();
+  const { loginUser, resetPassword } = useAuth();
   const [error, setError] = useState("");
 
   const handleLoginUser = (formData) => {
@@ -26,9 +28,22 @@ const LoginForm = () => {
         }
         toast.success(`${result.user.displayName} LoggedIn!`);
         reset();
-        navigate("/me");
+        navigate(location?.state ? location.state : "/me");
       })
       .catch((err) => setError(err.message));
+  };
+
+  const handleLogout = () => {
+    const email = getValues("email");
+
+    if (!email) {
+      return toast.error("Please Enter Your Email");
+    }
+    resetPassword(email)
+      .then(() => {
+        toast.success("Email Has Been Send for the Reset Password");
+      })
+      .catch((err) => setError(err));
   };
 
   return (
@@ -76,6 +91,7 @@ const LoginForm = () => {
           )}
           <div className="text-right mt-1">
             <button
+              onClick={handleLogout}
               type="button"
               className="underline text-red-500 font-semibold"
             >

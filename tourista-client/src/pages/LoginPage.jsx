@@ -1,9 +1,23 @@
 import LoginForm from "@/components/custom-components/LoginForm";
 import TitlePage from "@/components/custom-components/TitlePage";
-import { Link } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import AuthImage from "../assets/auth-image.png";
 
 const LoginPage = () => {
+  const { googleLogin } = useAuth();
+  const navigate = useNavigate();
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        toast.success(`Welcome ${result.user?.displayName}`);
+        navigate("/me");
+      })
+      .catch((err) => toast.error(err.message));
+  };
+
   return (
     <div className="container py-5">
       <TitlePage title="Login" />
@@ -22,7 +36,11 @@ const LoginPage = () => {
               Register
             </Link>{" "}
             Or{" "}
-            <button type="button" className="secondary-button">
+            <button
+              onClick={handleGoogleLogin}
+              type="button"
+              className="secondary-button"
+            >
               Login With Google
             </button>
           </p>

@@ -1,15 +1,19 @@
 import Footer from "@/components/custom-components/Footer";
 import Header from "@/components/custom-components/Header";
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
 
 const RootLayout = () => {
+  const location = useLocation();
+  const registerPage = location.pathname === "/register";
+  const loginPage = location.pathname === "/login";
+
   return (
     <>
-      <Header />
+      {!registerPage && !loginPage && <Header />}
       <main className="min-h-[calc(100vh-112px)]">
         <Outlet />
       </main>
-      <Footer />
+      {!registerPage && !loginPage && <Footer />}
     </>
   );
 };

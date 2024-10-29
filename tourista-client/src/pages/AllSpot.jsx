@@ -1,5 +1,6 @@
 import Loading from "@/components/custom-components/Loading";
 import SpotCard from "@/components/custom-components/SpotCard";
+import TitlePage from "@/components/custom-components/TitlePage";
 import { useAllSpotsData } from "@/hooks/useFetchSpotsData";
 
 const AllSpot = () => {
@@ -18,6 +19,7 @@ const AllSpot = () => {
 
   return (
     <section className="py-6">
+      <TitlePage title="All Spot" />
       <h1 className="font-bold text-2xl mb-6 text-center">All Spots</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {spots.map((item) => (

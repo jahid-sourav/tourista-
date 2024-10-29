@@ -7,6 +7,7 @@ import LoginPage from "@/pages/LoginPage";
 import MyListed from "@/pages/MyListed";
 import Profile from "@/pages/Profile";
 import RegisterPage from "@/pages/RegisterPage";
+import SpotDetail from "@/pages/SpotDetail";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
 
@@ -55,6 +56,14 @@ const router = createBrowserRouter([
       {
         path: "/all-spot",
         element: <AllSpot />,
+      },
+      {
+        path: "/spots/:id",
+        element: (
+          <ProtectedRoutes>
+            <SpotDetail />
+          </ProtectedRoutes>
+        ),
       },
     ],
   },

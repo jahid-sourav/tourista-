@@ -6,7 +6,11 @@ const fetchAllSpotsData = async () => {
   return data;
 };
 const fetchSpotsDataByEmail = async (email) => {
-  const { data } = await axios.get(`http://localhost:5000/spots/${email}`);
+  const { data } = await axios.get(`http://localhost:5000/tourSpots/${email}`);
+  return data;
+};
+const fetchASpotData = async (id) => {
+  const { data } = await axios.get(`http://localhost:5000/spots/${id}`);
   return data;
 };
 
@@ -22,5 +26,11 @@ const useSpotsDataByEmail = (email) => {
     queryFn: () => fetchSpotsDataByEmail(email),
   });
 };
+const useASpotData = (id) => {
+  return useQuery({
+    queryKey: ["spot", id],
+    queryFn: () => fetchASpotData(id),
+  });
+};
 
-export { useAllSpotsData, useSpotsDataByEmail };
+export { useAllSpotsData, useASpotData, useSpotsDataByEmail };

@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
@@ -51,8 +51,19 @@ async function run() {
       res.send(result);
     });
 
+    // View A Spot Detail By ID
+    app.get("/spots/:id", async (req, res) => {
+      const id = req.params.id;
+      if (!ObjectId.isValid(id)) {
+        return res.status(400).send({ error: "Invalid ID format" });
+      }
+      const query = { _id: new ObjectId(id) };
+      const result = await spotsCollection.findOne(query);
+      res.send(result);
+    });
+
     // View Spots By Email
-    app.get("/spots/:email", async (req, res) => {
+    app.get("/tourSpots/:email", async (req, res) => {
       const email = req.params.email;
       const query = { spot_creator_email: email };
       const cursor = spotsCollection.find(query);

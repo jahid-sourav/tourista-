@@ -1,10 +1,12 @@
 import RegisterForm from "@/components/custom-components/RegisterForm";
+import TitlePage from "@/components/custom-components/TitlePage";
 import { Link } from "react-router-dom";
 import AuthImage from "../assets/auth-image.png";
 
 const RegisterPage = () => {
   return (
     <div className="container py-5">
+      <TitlePage title="Register" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 place-items-center min-h-[90vh]">
         <div className="w-full">
           <img src={AuthImage} alt="Image" />

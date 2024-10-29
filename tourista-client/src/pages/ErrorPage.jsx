@@ -1,9 +1,11 @@
+import TitlePage from "@/components/custom-components/TitlePage";
 import { Link } from "react-router-dom";
 import ErrorImage from "../assets/404.png";
 
 const ErrorPage = () => {
   return (
     <div className="h-screen flex items-center justify-center">
+      <TitlePage title="Error" />
       <div>
         <img src={ErrorImage} alt="Error" />
         <div className="text-center mt-5">

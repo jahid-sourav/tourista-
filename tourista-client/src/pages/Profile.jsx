@@ -1,3 +1,4 @@
+import TitlePage from "@/components/custom-components/TitlePage";
 import useAuth from "@/hooks/useAuth";
 import { toast } from "react-toastify";
 
@@ -22,6 +23,7 @@ const Profile = () => {
 
   return (
     <section className="py-5">
+      <TitlePage title={user?.displayName} />
       <div className="flex justify-center">
         <img
           src={user?.photoURL}

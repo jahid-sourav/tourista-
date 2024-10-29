@@ -26,14 +26,24 @@ async function run() {
     await client.connect();
     // Create Collections
     const countriesCollection = client.db("touristaDB").collection("countries");
+    const spotsCollection = client.db("touristaDB").collection("spots");
 
     // Operation Starts Here
+
     // Get All Countries
     app.get("/countries", async (req, res) => {
       const cursor = countriesCollection.find();
       const result = await cursor.toArray();
       res.send(result);
     });
+
+    // Add Spot
+    app.post("/spots", async (req, res) => {
+      const newSpot = req.body;
+      const result = await spotsCollection.insertOne(newSpot);
+      res.send(result);
+    });
+
     // Operation Ends Here
 
     await client.db("admin").command({ ping: 1 });

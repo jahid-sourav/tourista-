@@ -138,47 +138,58 @@ const Header = () => {
                   >
                     My List
                   </NavLink>
-                  <Link
-                    to="/login"
-                    className="primary-button"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="secondary-button"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Register
-                  </Link>
-                  <div className="flex justify-center">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger className="outline-none">
-                        <img
-                          referrerPolicy="no-referrer"
-                          src={user?.photoURL}
-                          alt="User"
-                          className="w-[40px] h-[40px] rounded-full object-cover"
-                        />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuLabel className="text-center">
-                          {user?.displayName}
-                        </DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem className="flex justify-center focus:bg-transparent">
-                          <button
-                            onClick={handleLogout}
-                            type="button"
+                  {loading ? (
+                    <Loading size={20} color="white" />
+                  ) : (
+                    <>
+                      {user ? (
+                        <div className="flex justify-center">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger className="outline-none">
+                              <img
+                                referrerPolicy="no-referrer"
+                                src={user?.photoURL}
+                                alt="User"
+                                className="w-[40px] h-[40px] rounded-full object-cover"
+                              />
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              <DropdownMenuLabel className="text-center">
+                                {user?.displayName}
+                              </DropdownMenuLabel>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem className="flex justify-center focus:bg-transparent">
+                                <button
+                                  onClick={handleLogout}
+                                  type="button"
+                                  className="primary-button"
+                                >
+                                  Logout
+                                </button>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+                      ) : (
+                        <>
+                          <Link
+                            to="/login"
                             className="primary-button"
+                            onClick={() => setIsOpen(false)}
                           >
-                            Logout
-                          </button>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
+                            Login
+                          </Link>
+                          <Link
+                            to="/register"
+                            className="secondary-button"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            Register
+                          </Link>
+                        </>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
             )}

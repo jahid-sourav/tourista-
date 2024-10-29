@@ -168,7 +168,11 @@ const Header = () => {
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="flex justify-center focus:bg-transparent">
-                          <button type="button" className="primary-button">
+                          <button
+                            onClick={handleLogout}
+                            type="button"
+                            className="primary-button"
+                          >
                             Logout
                           </button>
                         </DropdownMenuItem>

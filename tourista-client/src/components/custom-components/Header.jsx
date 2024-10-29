@@ -1,3 +1,11 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import Hamburger from "hamburger-react";
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
@@ -42,6 +50,26 @@ const Header = () => {
             <Link to="/register" className="secondary-button">
               Register
             </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="outline-none">
+                <img
+                  src="https://s.hs-data.com/bilder/spieler/gross/226450.jpg"
+                  alt="User"
+                  className="w-[40px] h-[40px] rounded-full object-cover"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel className="text-center">
+                  User Name
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="flex justify-center focus:bg-transparent">
+                  <button type="button" className="primary-button">
+                    Logout
+                  </button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </ul>
           {/* Desktop Menu Ends Here */}
 
@@ -94,6 +122,28 @@ const Header = () => {
                   >
                     Register
                   </Link>
+                  <div className="flex justify-center">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger className="outline-none">
+                        <img
+                          src="https://s.hs-data.com/bilder/spieler/gross/226450.jpg"
+                          alt="User"
+                          className="w-[40px] h-[40px] rounded-full object-cover"
+                        />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuLabel className="text-center">
+                          User Name
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem className="flex justify-center focus:bg-transparent">
+                          <button type="button" className="primary-button">
+                            Logout
+                          </button>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
                 </div>
               </div>
             )}

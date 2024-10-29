@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+  body {
+    @apply font-raleway;
+  }
+}
+@layer components {
+  .header-nav-link {
+    @apply font-semibold text-lg;
+  }
+  .header-nav-link.active {
+    @apply text-[#f5a346];
+  }
+  .secondary-button,
+  .primary-button {
+    @apply bg-[#f5a346] px-4 py-2 rounded-md text-white font-semibold text-lg;
+  }
+  .secondary-button {
+    @apply bg-[#198754];
+  }
+}

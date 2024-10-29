@@ -206,6 +206,7 @@ const AddSpotForm = () => {
             readOnly
             type="email"
             name="spot_creator_email"
+            {...register("spot_creator_email")}
             value={user?.email}
             className="p-2 rounded border border-gray-300 w-full outline-none"
           />

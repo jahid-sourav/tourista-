@@ -44,6 +44,22 @@ async function run() {
       res.send(result);
     });
 
+    // View All Spots
+    app.get("/spots", async (req, res) => {
+      const cursor = spotsCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    // View Spots By Email
+    app.get("/spots/:email", async (req, res) => {
+      const email = req.params.email;
+      const query = { spot_creator_email: email };
+      const cursor = spotsCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // Operation Ends Here
 
     await client.db("admin").command({ ping: 1 });

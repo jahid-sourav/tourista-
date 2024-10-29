@@ -1,5 +1,6 @@
 import RootLayout from "@/layouts/RootLayout";
 import AddSpot from "@/pages/AddSpot";
+import AllSpot from "@/pages/AllSpot";
 import ErrorPage from "@/pages/ErrorPage";
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             <MyListed />
           </ProtectedRoutes>
         ),
+      },
+      {
+        path: "/all-spot",
+        element: <AllSpot />,
       },
     ],
   },

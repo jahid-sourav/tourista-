@@ -6,13 +6,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import useAuth from "@/hooks/useAuth";
 import Hamburger from "hamburger-react";
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Logo from "../../assets/logo/logo.png";
+import Loading from "./Loading";
 
 const Header = () => {
+  const { user, loading, logout } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout()
+      .then(() => {
+        toast.success("LoggedOut");
+        navigate("/login");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <header className="py-3 bg-[#1c231f] text-white">
@@ -44,32 +58,48 @@ const Header = () => {
                 My List
               </NavLink>
             </li>
-            <Link to="/login" className="primary-button">
-              Login
-            </Link>
-            <Link to="/register" className="secondary-button">
-              Register
-            </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="outline-none">
-                <img
-                  src="https://s.hs-data.com/bilder/spieler/gross/226450.jpg"
-                  alt="User"
-                  className="w-[40px] h-[40px] rounded-full object-cover"
-                />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel className="text-center">
-                  User Name
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="flex justify-center focus:bg-transparent">
-                  <button type="button" className="primary-button">
-                    Logout
-                  </button>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {loading ? (
+              <Loading size={20} color="white" />
+            ) : (
+              <>
+                {user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger className="outline-none">
+                      <img
+                        referrerPolicy="no-referrer"
+                        src={user?.photoURL}
+                        alt="User"
+                        className="w-[40px] h-[40px] rounded-full object-cover"
+                      />
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel className="text-center">
+                        {user?.displayName}
+                      </DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem className="flex justify-center focus:bg-transparent">
+                        <button
+                          onClick={handleLogout}
+                          type="button"
+                          className="primary-button"
+                        >
+                          Logout
+                        </button>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <>
+                    <Link to="/login" className="primary-button">
+                      Login
+                    </Link>
+                    <Link to="/register" className="secondary-button">
+                      Register
+                    </Link>
+                  </>
+                )}
+              </>
+            )}
           </ul>
           {/* Desktop Menu Ends Here */}
 
@@ -126,14 +156,15 @@ const Header = () => {
                     <DropdownMenu>
                       <DropdownMenuTrigger className="outline-none">
                         <img
-                          src="https://s.hs-data.com/bilder/spieler/gross/226450.jpg"
+                          referrerPolicy="no-referrer"
+                          src={user?.photoURL}
                           alt="User"
                           className="w-[40px] h-[40px] rounded-full object-cover"
                         />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
                         <DropdownMenuLabel className="text-center">
-                          User Name
+                          {user?.displayName}
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="flex justify-center focus:bg-transparent">

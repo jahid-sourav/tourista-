@@ -27,7 +27,9 @@ const MyListed = () => {
       confirmButtonText: "Yes, delete it!",
     });
     if (result.isConfirmed) {
-      const { data } = await axios.delete(`http://localhost:5000/spots/${id}`);
+      const { data } = await axios.delete(
+        `https://tourista-server-indol.vercel.app/spots/${id}`
+      );
       if (data.deletedCount > 0) {
         Swal.fire({
           title: "Deleted!",

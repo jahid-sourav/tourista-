@@ -20,7 +20,7 @@ const AddSpotForm = () => {
   const handleAddSpot = async (formData) => {
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/spots",
+        "https://tourista-server-indol.vercel.app/spots",
         formData
       );
       if (data.insertedId) {

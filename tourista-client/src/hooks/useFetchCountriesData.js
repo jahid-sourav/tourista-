@@ -3,7 +3,9 @@ import axios from "axios";
 
 const fetchAllCountries = async () => {
   try {
-    const { data } = await axios.get("http://localhost:5000/countries");
+    const { data } = await axios.get(
+      "https://tourista-server-indol.vercel.app/countries"
+    );
     return data;
   } catch (err) {
     console.log(err);

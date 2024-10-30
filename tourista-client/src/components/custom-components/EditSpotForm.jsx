@@ -18,7 +18,7 @@ const EditSpotForm = () => {
   const handleEditSpot = async (formData) => {
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/spots/${id}`,
+        `https://tourista-server-indol.vercel.app/spots/${id}`,
         formData
       );
       if (data.modifiedCount > 0) {

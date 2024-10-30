@@ -2,28 +2,35 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 // const fetchAllSpotsData = async () => {
-//   const { data } = await axios.get(`http://localhost:5000/spots`);
+//   const { data } = await axios.get(`https://tourista-server-indol.vercel.app/spots`);
 //   return data;
 // };
 
 const fetchAllSpotsData = async (sort) => {
-  const { data } = await axios.get(`http://localhost:5000/spots`, {
-    params: { sort },
-  });
+  const { data } = await axios.get(
+    `https://tourista-server-indol.vercel.app/spots`,
+    {
+      params: { sort },
+    }
+  );
   return data;
 };
 const fetchSpotsDataByEmail = async (email) => {
-  const { data } = await axios.get(`http://localhost:5000/tourSpots/${email}`);
+  const { data } = await axios.get(
+    `https://tourista-server-indol.vercel.app/tourSpots/${email}`
+  );
   return data;
 };
 const fetchSpotsDataByCountry = async (country) => {
   const { data } = await axios.get(
-    `http://localhost:5000/tourSpotsByCountry/${country}`
+    `https://tourista-server-indol.vercel.app/tourSpotsByCountry/${country}`
   );
   return data;
 };
 const fetchASpotData = async (id) => {
-  const { data } = await axios.get(`http://localhost:5000/spots/${id}`);
+  const { data } = await axios.get(
+    `https://tourista-server-indol.vercel.app/spots/${id}`
+  );
   return data;
 };
 

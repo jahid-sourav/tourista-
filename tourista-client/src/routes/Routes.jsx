@@ -11,6 +11,7 @@ import RegisterPage from "@/pages/RegisterPage";
 import SpotDetail from "@/pages/SpotDetail";
 import SpotsByCountry from "@/pages/SpotsByCountry";
 import { createBrowserRouter } from "react-router-dom";
+import AuthRedirect from "./AuthRedirect";
 import ProtectedRoutes from "./ProtectedRoutes";
 
 const router = createBrowserRouter([
@@ -25,11 +26,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/register",
-        element: <RegisterPage />,
+        element: (
+          <AuthRedirect>
+            <RegisterPage />
+          </AuthRedirect>
+        ),
       },
       {
         path: "/login",
-        element: <LoginPage />,
+        element: (
+          <AuthRedirect>
+            <LoginPage />
+          </AuthRedirect>
+        ),
       },
       {
         path: "/me",

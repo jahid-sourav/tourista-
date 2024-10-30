@@ -2,11 +2,17 @@ import Loading from "@/components/custom-components/Loading";
 import SpotCard from "@/components/custom-components/SpotCard";
 import TitlePage from "@/components/custom-components/TitlePage";
 import { useAllSpotsData } from "@/hooks/useFetchSpotsData";
+import { useState } from "react";
 
 const AllSpot = () => {
-  const { data: spots, isLoading, error } = useAllSpotsData();
+  const [sort, setSort] = useState("");
+  const { data: spots, isLoading, isFetching, error } = useAllSpotsData(sort);
 
-  if (isLoading) {
+  const handleSortChange = (e) => {
+    setSort(e.target.value);
+  };
+
+  if (isLoading || isFetching) {
     return (
       <div className="py-5">
         <Loading size={50} color="green" />
@@ -21,6 +27,19 @@ const AllSpot = () => {
     <section className="py-6">
       <TitlePage title="All Spot" />
       <h1 className="font-bold text-2xl mb-6 text-center">All Spots</h1>
+      <div className="text-center mb-10">
+        <select
+          value={sort}
+          onChange={handleSortChange}
+          className="p-2 rounded bg-green-500 outline-0"
+        >
+          <option value="" disabled>
+            Sort By Average Cost
+          </option>
+          <option value="lowToHigh">Low To High</option>
+          <option value="highToLow">High To Low</option>
+        </select>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {spots.map((item) => (
           <SpotCard

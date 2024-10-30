@@ -1,8 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const fetchAllSpotsData = async () => {
-  const { data } = await axios.get(`http://localhost:5000/spots`);
+// const fetchAllSpotsData = async () => {
+//   const { data } = await axios.get(`http://localhost:5000/spots`);
+//   return data;
+// };
+
+const fetchAllSpotsData = async (sort) => {
+  const { data } = await axios.get(`http://localhost:5000/spots`, {
+    params: { sort },
+  });
   return data;
 };
 const fetchSpotsDataByEmail = async (email) => {
@@ -14,10 +21,17 @@ const fetchASpotData = async (id) => {
   return data;
 };
 
-const useAllSpotsData = () => {
+// const useAllSpotsData = () => {
+//   return useQuery({
+//     queryKey: ["spots"],
+//     queryFn: fetchAllSpotsData,
+//   });
+// };
+
+const useAllSpotsData = (sort) => {
   return useQuery({
-    queryKey: ["spots"],
-    queryFn: fetchAllSpotsData,
+    queryKey: ["spots", sort],
+    queryFn: () => fetchAllSpotsData(sort),
   });
 };
 const useSpotsDataByEmail = (email) => {

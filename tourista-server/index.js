@@ -46,7 +46,17 @@ async function run() {
 
     // View All Spots
     app.get("/spots", async (req, res) => {
-      const cursor = spotsCollection.find();
+      const { sort } = req.query;
+      let sortOrder = {};
+
+      // Low to High or High to Low sorting
+      if (sort === "lowToHigh") {
+        sortOrder = { spot_average_cost: 1 }; // Ascending order
+      } else if (sort === "highToLow") {
+        sortOrder = { spot_average_cost: -1 }; // Descending order
+      }
+
+      const cursor = spotsCollection.find().sort(sortOrder);
       const result = await cursor.toArray();
       res.send(result);
     });

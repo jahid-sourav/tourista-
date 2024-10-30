@@ -2,6 +2,7 @@ import useAuth from "@/hooks/useAuth";
 import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import Field from "./Field";
@@ -18,6 +19,8 @@ const RegisterForm = () => {
   const { createUser } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [show, setShow] = useState(false);
+  const [showAnother, setShowAnother] = useState(false);
 
   const handleRegister = (formData) => {
     let registeredUser;
@@ -109,51 +112,69 @@ const RegisterForm = () => {
             <p className="text-red-500">{errors.country_name.message}</p>
           )}
         </Field>
-        <Field htmlFor="password" label="Password">
-          <input
-            {...register("password", {
-              required: "Password is Required",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters",
-              },
-              pattern: {
-                value: /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-                message:
-                  "Password must contain at least one uppercase and one lowercase letter",
-              },
-            })}
-            type="password"
-            name="password"
-            id="password"
-            placeholder="Enter Password"
-            className={`p-2 border ${
-              errors.password ? "border-red-600" : "border-gray-400"
-            } rounded outline-none w-full`}
-          />
-          {errors.password && (
-            <p className="text-red-500">{errors.password.message}</p>
-          )}
-        </Field>
-        <Field htmlFor="confirmPassword" label="Confirm Password">
-          <input
-            {...register("confirmPassword", {
-              required: "Confirm Password is Required",
-              validate: (value) =>
-                value === password || "Passwords do not match",
-            })}
-            type="password"
-            name="confirmPassword"
-            id="confirmPassword"
-            placeholder="Enter Confirm Password"
-            className={`p-2 border ${
-              errors.confirmPassword ? "border-red-600" : "border-gray-400"
-            } rounded outline-none w-full`}
-          />
-          {errors.confirmPassword && (
-            <p className="text-red-500">{errors.confirmPassword.message}</p>
-          )}
-        </Field>
+        <div className="relative">
+          <Field htmlFor="password" label="Password">
+            <input
+              {...register("password", {
+                required: "Password is Required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
+                  message:
+                    "Password must contain at least one uppercase and one lowercase letter",
+                },
+              })}
+              type={show ? "text" : "password"}
+              name="password"
+              id="password"
+              placeholder="Enter Password"
+              className={`p-2 border ${
+                errors.password ? "border-red-600" : "border-gray-400"
+              } rounded outline-none w-full`}
+            />
+            {errors.password && (
+              <p className="text-red-500">{errors.password.message}</p>
+            )}
+          </Field>
+          <button
+            onClick={() => setShow(!show)}
+            type="button"
+            className="absolute top-[56px] right-2 translate-y-[-50%] outline-none"
+          >
+            {show ? <FaRegEyeSlash /> : <FaRegEye />}
+          </button>
+        </div>
+        <div className="relative">
+          <Field htmlFor="confirmPassword" label="Confirm Password">
+            <input
+              {...register("confirmPassword", {
+                required: "Confirm Password is Required",
+                validate: (value) =>
+                  value === password || "Passwords do not match",
+              })}
+              type={showAnother ? "text" : "password"}
+              name="confirmPassword"
+              id="confirmPassword"
+              placeholder="Enter Confirm Password"
+              className={`p-2 border ${
+                errors.confirmPassword ? "border-red-600" : "border-gray-400"
+              } rounded outline-none w-full`}
+            />
+            {errors.confirmPassword && (
+              <p className="text-red-500">{errors.confirmPassword.message}</p>
+            )}
+          </Field>
+          <button
+            onClick={() => setShowAnother(!showAnother)}
+            type="button"
+            className="absolute top-[56px] right-2 translate-y-[-50%] outline-none"
+          >
+            {showAnother ? <FaRegEyeSlash /> : <FaRegEye />}
+          </button>
+        </div>
       </div>
       <div className="text-center mt-4">
         {error && <p className="text-red-500 mb-3">{error}</p>}

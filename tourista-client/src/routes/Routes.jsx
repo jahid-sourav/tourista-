@@ -9,6 +9,7 @@ import MyListed from "@/pages/MyListed";
 import Profile from "@/pages/Profile";
 import RegisterPage from "@/pages/RegisterPage";
 import SpotDetail from "@/pages/SpotDetail";
+import SpotsByCountry from "@/pages/SpotsByCountry";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoutes";
 
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
             <EditSpot />
           </ProtectedRoutes>
         ),
+      },
+      {
+        path: "/spots-by-country/:countryName",
+        element: <SpotsByCountry />,
       },
     ],
   },

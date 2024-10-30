@@ -16,6 +16,12 @@ const fetchSpotsDataByEmail = async (email) => {
   const { data } = await axios.get(`http://localhost:5000/tourSpots/${email}`);
   return data;
 };
+const fetchSpotsDataByCountry = async (country) => {
+  const { data } = await axios.get(
+    `http://localhost:5000/tourSpotsByCountry/${country}`
+  );
+  return data;
+};
 const fetchASpotData = async (id) => {
   const { data } = await axios.get(`http://localhost:5000/spots/${id}`);
   return data;
@@ -40,6 +46,12 @@ const useSpotsDataByEmail = (email) => {
     queryFn: () => fetchSpotsDataByEmail(email),
   });
 };
+const useSpotsDataByCountry = (country) => {
+  return useQuery({
+    queryKey: ["touristsSpots", country],
+    queryFn: () => fetchSpotsDataByCountry(country),
+  });
+};
 const useASpotData = (id) => {
   return useQuery({
     queryKey: ["spot", id],
@@ -47,4 +59,9 @@ const useASpotData = (id) => {
   });
 };
 
-export { useAllSpotsData, useASpotData, useSpotsDataByEmail };
+export {
+  useAllSpotsData,
+  useASpotData,
+  useSpotsDataByCountry,
+  useSpotsDataByEmail,
+};

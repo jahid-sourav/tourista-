@@ -81,6 +81,15 @@ async function run() {
       res.send(result);
     });
 
+    // View Spots By Country
+    app.get("/tourSpotsByCountry/:countryName", async (req, res) => {
+      const country = req.params.countryName;
+      const query = { spot_country: country };
+      const cursor = spotsCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
     // Update A Spot
     app.put("/spots/:id", async (req, res) => {
       const id = req.params.id;

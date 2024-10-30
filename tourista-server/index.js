@@ -81,6 +81,29 @@ async function run() {
       res.send(result);
     });
 
+    // Update A Spot
+    app.put("/spots/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateSpot = req.body;
+      const spot = {
+        $set: {
+          spot_image_url: updateSpot.spot_image_url,
+          spot_name: updateSpot.spot_name,
+          spot_country: updateSpot.spot_country,
+          spot_seasonality: updateSpot.spot_seasonality,
+          spot_location: updateSpot.spot_location,
+          spot_average_cost: updateSpot.spot_average_cost,
+          spot_travel_time: updateSpot.spot_travel_time,
+          spot_total_visitors_per_year: updateSpot.spot_total_visitors_per_year,
+          spot_short_description: updateSpot.spot_short_description,
+        },
+      };
+      const result = await spotsCollection.updateOne(filter, spot, options);
+      res.send(result);
+    });
+
     // Delete A Spot
     app.delete("/spots/:id", async (req, res) => {
       const id = req.params.id;

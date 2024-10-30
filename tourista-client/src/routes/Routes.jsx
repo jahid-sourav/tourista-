@@ -1,6 +1,7 @@
 import RootLayout from "@/layouts/RootLayout";
 import AddSpot from "@/pages/AddSpot";
 import AllSpot from "@/pages/AllSpot";
+import EditSpot from "@/pages/EditSpot";
 import ErrorPage from "@/pages/ErrorPage";
 import HomePage from "@/pages/HomePage";
 import LoginPage from "@/pages/LoginPage";
@@ -62,6 +63,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoutes>
             <SpotDetail />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "/edit/:id",
+        element: (
+          <ProtectedRoutes>
+            <EditSpot />
           </ProtectedRoutes>
         ),
       },

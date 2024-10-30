@@ -241,15 +241,3 @@ const AddSpotForm = () => {
 };
 
 export default AddSpotForm;
-
-/*
-spot_average_cost
-spot_country
-spot_image_url
-spot_location
-spot_name
-spot_seasonality
-spot_short_description
-spot_total_visitors_per_year
-spot_travel_time
-*/

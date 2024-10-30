@@ -3,7 +3,9 @@ import SpotCard from "@/components/custom-components/SpotCard";
 import TitlePage from "@/components/custom-components/TitlePage";
 import useAuth from "@/hooks/useAuth";
 import { useSpotsDataByEmail } from "@/hooks/useFetchSpotsData";
+import axios from "axios";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyListed = () => {
   const { user } = useAuth();
@@ -11,7 +13,30 @@ const MyListed = () => {
     data: touristSpots,
     isLoading,
     error,
+    refetch,
   } = useSpotsDataByEmail(user?.email);
+
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+    if (result.isConfirmed) {
+      const { data } = await axios.delete(`http://localhost:5000/spots/${id}`);
+      if (data.deletedCount > 0) {
+        Swal.fire({
+          title: "Deleted!",
+          icon: "success",
+        });
+        refetch();
+      }
+    }
+  };
 
   if (isLoading) {
     return (
@@ -37,7 +62,12 @@ const MyListed = () => {
               title={item?.spot_name}
               link={`/spots/${item?._id}`}
             >
-              <button className="primary-button">Delete</button>
+              <button
+                className="primary-button"
+                onClick={() => handleDelete(item?._id)}
+              >
+                Delete
+              </button>
               <Link to={`/edit/${item?._id}`} className="secondary-button">
                 Edit
               </Link>

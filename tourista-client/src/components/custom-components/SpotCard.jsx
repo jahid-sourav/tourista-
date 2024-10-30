@@ -10,7 +10,7 @@ const SpotCard = ({ children, image, title, link }) => {
         className="rounded h-[200px] w-full object-cover"
       />
       <h2 className="text-center my-3 font-bold text-lg">{title}</h2>
-      <div className="flex justify-center flex-wrap gap-2">
+      <div className="flex justify-center items-center flex-wrap gap-2">
         <Link className="secondary-button" to={link}>
           View Details
         </Link>

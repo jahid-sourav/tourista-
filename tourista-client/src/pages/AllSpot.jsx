@@ -28,7 +28,11 @@ const AllSpot = () => {
             image={item?.spot_image_url}
             title={item?.spot_name}
             link={`/spots/${item?._id}`}
-          />
+          >
+            <span className="font-semibold text-lg">
+              ${item?.spot_average_cost}
+            </span>
+          </SpotCard>
         ))}
       </div>
     </section>

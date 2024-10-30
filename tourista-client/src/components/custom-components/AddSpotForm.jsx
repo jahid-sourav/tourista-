@@ -8,7 +8,7 @@ import Loading from "./Loading";
 
 const AddSpotForm = () => {
   const navigate = useNavigate();
-  const { data: countries, isLoading, error } = useCountriesData();
+  const { data: countries, isLoading, error, refetch } = useCountriesData();
   const { user } = useAuth();
   const {
     handleSubmit,
@@ -25,6 +25,7 @@ const AddSpotForm = () => {
       );
       if (data.insertedId) {
         reset();
+        refetch();
         toast.success("A New Spot Added");
         navigate("/my-list");
       } else {

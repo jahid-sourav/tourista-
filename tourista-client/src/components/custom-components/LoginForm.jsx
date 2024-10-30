@@ -14,8 +14,8 @@ const LoginForm = () => {
     getValues,
   } = useForm();
 
-  const navigate = useNavigate();
   const location = useLocation();
+  const navigate = useNavigate();
   const { loginUser, resetPassword } = useAuth();
   const [error, setError] = useState("");
 

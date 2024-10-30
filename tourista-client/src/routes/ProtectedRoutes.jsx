@@ -5,6 +5,7 @@ import { Navigate, useLocation } from "react-router";
 
 const ProtectedRoutes = ({ children }) => {
   const location = useLocation();
+
   const { user, loading } = useAuth();
 
   if (loading) {
